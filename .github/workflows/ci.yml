@@ -1,0 +1,42 @@
+# Pipeline de Integración Continua del taller.
+# Se ejecuta en cada push y en cada pull request: instala, prueba y publica la VCRM.
+name: CI - Verificacion automatica
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:      # permite lanzarlo a mano desde la pestaña Actions
+
+jobs:
+  verificacion:
+    name: Pruebas y matriz VCRM
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v6
+
+      - name: Preparar Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar las pruebas
+        run: pytest
+
+      - name: Generar la matriz VCRM
+        if: always()            # se genera también cuando las pruebas fallan
+        run: |
+          python tools/vcrm.py
+          cat reports/vcrm.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Guardar informes como artefacto
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: informes-verificacion
+          path: reports/

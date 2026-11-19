@@ -1,0 +1,37 @@
+# Especificación de requisitos del BMS del dron de inspección.
+# Cada requisito declara el método de verificación previsto (columna de la VCRM).
+# Métodos: Test | Inspeccion | Analisis | Demostracion
+# Los requisitos con método "Test" se consideran verificados cuando al menos
+# una prueba marcada con @pytest.mark.req("<id>") existe y todas pasan.
+
+- id: REQ-01
+  texto: "El BMS calculará el estado de carga (SoC) por interpolación lineal de la tensión media de celda entre 3,0 V (0 %) y 4,2 V (100 %), saturado en [0, 100] %."
+  metodo: Test
+
+- id: REQ-02
+  texto: "El BMS rechazará lecturas fuera de rango físico (tensión de celda fuera de [0, 5] V o temperatura fuera de [-40, 125] °C)."
+  metodo: Test
+
+- id: REQ-03
+  texto: "Si la temperatura del pack supera 60 °C, el BMS pasará a modo FAULT."
+  metodo: Test
+
+- id: REQ-04
+  texto: "Si alguna celda está por debajo de 3,0 V, el BMS pasará a modo FAULT."
+  metodo: Test
+
+- id: REQ-05
+  texto: "Si el SoC es inferior al 20 % y no hay fallo, el BMS ordenará RETURN_TO_HOME."
+  metodo: Test
+
+- id: REQ-06
+  texto: "Si la diferencia entre la celda más cargada y la menos cargada supera 0,10 V, el BMS activará el balanceo."
+  metodo: Test
+
+- id: REQ-07
+  texto: "Si la corriente de descarga supera 30 A en valor absoluto, el BMS pasará a modo FAULT."
+  metodo: Test
+
+- id: REQ-08
+  texto: "Todas las funciones públicas del BMS documentarán las unidades físicas de sus parámetros."
+  metodo: Inspeccion

@@ -1,0 +1,10 @@
+[project]
+name = "bms-taller-ci"
+version = "0.1.0"
+description = "BMS de ejemplo para el taller de Integración Continua y V&V"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --junitxml=reports/junit.xml"
