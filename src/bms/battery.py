@@ -21,7 +21,7 @@ V_MAX_FISICA = 5.0           # V
 T_MIN_FISICA = -40.0         # °C
 T_MAX_FISICA = 125.0         # °C
 
-T_MAX_OPERACION = 60.0       # °C sobretemperatura -> FAULT       (REQ-03)
+T_MAX_OPERACION = 70.0       # °C sobretemperatura -> FAULT       (REQ-03)
 V_MIN_CELDA = 3.0            # V  subtensión de celda -> FAULT    (REQ-04)
 SOC_RETORNO = 20.0           # %  por debajo -> RETURN_TO_HOME    (REQ-05)
 DESEQUILIBRIO_MAX = 0.10     # V  diferencia máx. entre celdas    (REQ-06)
